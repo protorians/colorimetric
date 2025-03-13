@@ -1,4 +1,4 @@
-import {ColorimetricType} from "./enums";
+import {ColorimetricType} from "./enums.js";
 
 export type IColorimetricLightnessSetting = {
     min: number;
