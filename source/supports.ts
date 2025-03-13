@@ -6,8 +6,8 @@ import {
     IColorKey, IColorLab, IColorLch, IColorOklch, IColorRgb, IColorRgbAlpha,
     IColorSlots,
     IColorValueSyntax, IColorXyz
-} from "./types";
-import {ColorimetricType} from "./enums";
+} from "./types.js";
+import {ColorimetricType} from "./enums.js";
 import {adjustDecimalPercent, adjustPercent, clamp, pad, trimSpace} from "@protorians/core";
 
 export namespace Colorimetric {
@@ -47,7 +47,7 @@ export namespace Colorimetric {
         if (Array.isArray(color)) {
             if (color.length == 3) return Rgba.toHex(...color)
             else if (color.length == 4) return Rgba.alphaToHex(...color)
-        } else if (typeof color == 'string') {
+        } else {
             color = color.trim();
             if (color.toLowerCase().startsWith(`rgb(`)) {
                 const rgb = trimSpace(color).match(Colorimetric.RGB_PATTERN)
