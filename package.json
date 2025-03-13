@@ -1,0 +1,29 @@
+{
+  "name": "@protorians/colorimetric",
+  "version": "0.0.0",
+  "description": "Color Manager",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "rm -rf ~esm ~cjs && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p esm.tsconfig.json && ts-add-js-extension --dir=~esm",
+    "build:cjs": "tsc -p cjs.tsconfig.json && ts-add-js-extension --dir=~cjs"
+  },
+  "keywords": [
+    "protorians",
+    "colorimetric",
+    "color"
+  ],
+  "author": "Y. Yannick GOBOU<protorian.dev@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/protorians/colorimetric.git"
+  },
+  "dependencies": {
+    "@protorians/core": "^0.1.19"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
