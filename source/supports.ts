@@ -35,7 +35,7 @@ export namespace Colorimetric {
     export function render(hex: string, alpha: number = 100): string {
         return Settings.type === ColorimetricType.Oklch
             ? Oklch.toString({...Hex.toOklch(hex), alpha})
-            : `${hex}${Math.round(alpha * .001 * 255).toString(16).padStart(2, '0')}`;
+            : `${hex}${pad(Math.round(alpha * .001 * 255).toString(16))}`;
     }
 
     export function spectre(value: number) {

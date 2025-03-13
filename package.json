@@ -1,6 +1,6 @@
 {
   "name": "@protorians/colorimetric",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Color Manager",
   "main": "./~esm/index.js",
   "type": "module",
