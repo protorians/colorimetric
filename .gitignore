@@ -3,6 +3,7 @@ node_modules
 .idea/*
 ~cjs
 ~esm
+build
 *-lock.*
 *.lock
 pnpm-lock.yaml
