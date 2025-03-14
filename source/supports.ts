@@ -1,11 +1,12 @@
 import {
     IColorAlphas,
     IColorHex, IColorHslProps,
+    IColorimetricAlgo,
     IColorimetricSettings,
     IColorIntensities,
     IColorKey, IColorLab, IColorLch, IColorOklch, IColorRgb, IColorRgbAlpha,
     IColorSlots,
-    IColorValueSyntax, IColorXyz
+    IColorValueSyntax, IColorXyz, IOklchAlgo
 } from "./types.js";
 import {ColorimetricType} from "./enums.js";
 import {adjustDecimalPercent, adjustPercent, clamp, pad, trimSpace} from "@protorians/core";
@@ -495,16 +496,16 @@ export namespace Colorimetric {
     }
 
 
-    export class Oklch {
+    export const Oklch: IColorimetricAlgo<IColorOklch> & IOklchAlgo = {
 
-        static toString(color: IColorOklch) {
+        toString(color: IColorOklch) {
             color.lightness = adjustPercent(color.lightness);
             color.alpha = adjustPercent(color.alpha || 100);
             // color.hue = spectre(color.hue);
             return `oklch(${color.lightness}% ${color.chroma} ${color.hue}${color.alpha < 100 ? ` / ${color.alpha}%` : ``})`
-        }
+        },
 
-        static parse(color: string): IColorOklch | undefined {
+        parse(color: string): IColorOklch | undefined {
             let match = color.match(OKLCH_PATTERN)
 
             if (match) {
@@ -518,9 +519,9 @@ export namespace Colorimetric {
             }
 
             return undefined;
-        }
+        },
 
-        static variation(color: IColorOklch | string, value: string) {
+        variation(color: IColorOklch | string, value: string) {
             const parsed = typeof color === 'string' ? this.parse(color) : color;
 
             if (parsed) {
@@ -547,23 +548,23 @@ export namespace Colorimetric {
             }
 
             return parsed;
-        }
+        },
 
-        static toHex(oklch: IColorOklch): string {
+        toHex(oklch: IColorOklch): string {
             const lch = this.toLch(oklch);
             const lab = Lch.toLab(lch);
             const xyz = Lab.toXyz(lab);
             const rgb = Xyz.toRgb(xyz);
             return Rgba.toHex(rgb[0], rgb[1], rgb[2]);
-        }
+        },
 
-        static toLch({lightness, chroma, hue}: IColorOklch): IColorLch {
+        toLch({lightness, chroma, hue}: IColorOklch): IColorLch {
             return {
                 lightness,
                 chroma,
                 hue
             }
-        }
+        },
 
     }
 

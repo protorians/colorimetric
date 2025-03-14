@@ -178,3 +178,17 @@ export type IColorAdjustOptions = {
     blackness?: number,
     alpha?: number
 }
+
+
+
+export interface IOklchAlgo{
+    toHex(oklch: IColorOklch): string;
+    toLch({lightness, chroma, hue}: IColorOklch): IColorLch;
+}
+
+
+export interface IColorimetricAlgo<T> {
+    toString(value: T): string;
+    parse(color: string): T | undefined;
+    variation(color: IColorOklch | string, value: string): T | undefined;
+}
