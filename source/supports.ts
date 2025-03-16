@@ -67,7 +67,7 @@ export namespace Colorimetric {
                 ) : '#000000';
             } else if (color.toLowerCase().startsWith(`oklch(`)) {
                 const get = Oklch.parse(color)
-                return get ? Oklch.toHex(get) : '000'
+                return get ? Oklch.toHex(get) : '#000000FF'
             } else if (color.includes(',')) {
                 const parse = color.split(',').map(v => parseInt(v, 1));
                 const rgb = parse.length == 3 || parse.length == 4 ? parse : undefined;
@@ -291,7 +291,7 @@ export namespace Colorimetric {
         }
 
         static decimal(value: number): string {
-            const hex = value.toString(16);
+            const hex = (value).toString(16);
             return (hex.length == 1 ? `0${hex}` : hex).substring(0, 2);
         }
 
@@ -454,7 +454,7 @@ export namespace Colorimetric {
     export class Rgba {
 
         static toHex(red: number, green: number, blue: number): string {
-            return `#${Hex.decimal(red)}${Hex.decimal(green)}${Hex.decimal(blue)}`
+            return `#${Hex.decimal(red)}${Hex.decimal(green)}${Hex.decimal(blue)}`.toUpperCase()
         }
 
         static alphaToHex(red: number, green: number, blue: number, alpha: number) {
@@ -510,8 +510,11 @@ export namespace Colorimetric {
 
             if (match) {
                 const explode = match[1].replace(/\s\/\s/gi, ' ').split(' ');
+
                 return {
-                    lightness: parseFloat(explode[0]),
+                    lightness: parseFloat(
+                        `${!explode[0].includes('%') ? parseFloat(explode[0] || '0') * 100 : explode[0]}`
+                    ),
                     chroma: parseFloat(explode[1]),
                     hue: parseFloat(explode[2]),
                     alpha: explode[3] ? parseFloat(explode[3]) : 100
@@ -555,7 +558,7 @@ export namespace Colorimetric {
             const lab = Lch.toLab(lch);
             const xyz = Lab.toXyz(lab);
             const rgb = Xyz.toRgb(xyz);
-            return Rgba.toHex(rgb[0], rgb[1], rgb[2]);
+            return Rgba.toHex(rgb.red, rgb.green, rgb.blue);
         },
 
         toLch({lightness, chroma, hue}: IColorOklch): IColorLch {
