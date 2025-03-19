@@ -1,6 +1,6 @@
 {
   "name": "@protorians/colorimetric",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Color Manager",
   "main": "./build/index.js",
   "type": "module",
@@ -21,7 +21,7 @@
     "url": "git+https://github.com/protorians/colorimetric.git"
   },
   "dependencies": {
-    "@protorians/core": "^0.1.21"
+    "@protorians/core": "^0.1.31"
   },
   "devDependencies": {
     "typescript": "^5.8.2"
