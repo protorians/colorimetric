@@ -18,12 +18,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/protorians/colorimetric.git"
+    "url": "https://github.com/protorians/colorimetric.git"
   },
   "dependencies": {
-    "@protorians/core": "^0.1.31"
+    "@protorians/core": "workspace:*"
   },
-  "devDependencies": {
+  "peerDependencies": {
     "typescript": "^5.8.2"
   }
 }
